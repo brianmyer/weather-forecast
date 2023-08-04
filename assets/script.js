@@ -10,6 +10,16 @@ let currentCity = document.querySelector('#current-city');
 let currentCityTemp = document.querySelector('#current-city-temp');
 let currentCityWind = document.querySelector('#current-city-wind');
 let currentCityHumidity = document.querySelector('#current-city-humidity');
+let day1 = document.querySelector('#day1');
+let day2 = document.querySelector('#day2');
+let day3 = document.querySelector('#day3');
+let day4 = document.querySelector('#day4');
+let day5 = document.querySelector('#day5');
+let day1Weather = document.querySelector('#day1-weather');
+let day2Weather = document.querySelector('#day2-weather');
+let day3Weather = document.querySelector('#day3-weather');
+let day4Weather = document.querySelector('#day4-weather');
+let day5Weather = document.querySelector('#day5-weather');
 
 searchBtn.addEventListener('click', function(event) {
     event.preventDefault()
@@ -41,13 +51,38 @@ searchBtn.addEventListener('click', function(event) {
 })
 .then(function (firstCity) {
     console.log(firstCity);
-    // get icon instead of url to render
-    currentCity.textContent = `${firstCity.city.name} ${firstCity.list[0].dt} https://openweathermap.org/img/wn/${firstCity.list[0].weather[0].icon}@2x.png'`
+    // convert dt to time format and get icon instead of url to render
+    currentCity.textContent = `${firstCity.city.name} ${firstCity.list[0].dt} https://openweathermap.org/img/wn/${firstCity.list[0].weather[0].icon}@2x.png`
     // convert from K to F
-    currentCityTemp.textContent = `Temp: ${firstCity.list[0].main.temp}`
+    currentCityTemp.textContent = `Temp: ${firstCity.list[0].main.temp}°F`
     currentCityWind.textContent = `Wind: ${firstCity.list[0].wind.speed} MPH`
     currentCityHumidity.textContent = `Humidity: ${firstCity.list[0].main.humidity}%`
-
+    day1.textContent = `${firstCity.list[8].dt}`
+    day2.textContent = `${firstCity.list[16].dt}`
+    day3.textContent = `${firstCity.list[24].dt}`
+    day4.textContent = `${firstCity.list[32].dt}`
+    day5.textContent = `${firstCity.list[39].dt}`
+    // string literal?
+    day1Weather.textContent = `https://openweathermap.org/img/wn/${firstCity.list[8].weather[0].icon}@2x.png
+    Temp: ${firstCity.list[8].main.temp}°F 
+    Wind: ${firstCity.list[8].wind.speed} MPH 
+    Humidity: ${firstCity.list[8].main.humidity}%`
+    day2Weather.textContent = `https://openweathermap.org/img/wn/${firstCity.list[16].weather[0].icon}@2x.png
+    Temp: ${firstCity.list[16].main.temp}°F 
+    Wind: ${firstCity.list[16].wind.speed} MPH 
+    Humidity: ${firstCity.list[16].main.humidity}%`
+    day3Weather.textContent = `https://openweathermap.org/img/wn/${firstCity.list[24].weather[0].icon}@2x.png
+    Temp: ${firstCity.list[24].main.temp}°F 
+    Wind: ${firstCity.list[24].wind.speed} MPH 
+    Humidity: ${firstCity.list[24].main.humidity}%`
+    day4Weather.textContent = `https://openweathermap.org/img/wn/${firstCity.list[32].weather[0].icon}@2x.png
+    Temp: ${firstCity.list[32].main.temp}°F 
+    Wind: ${firstCity.list[32].wind.speed} MPH 
+    Humidity: ${firstCity.list[32].main.humidity}%`
+    day5Weather.textContent = `https://openweathermap.org/img/wn/${firstCity.list[39].weather[0].icon}@2x.png
+    Temp: ${firstCity.list[39].main.temp}°F 
+    Wind: ${firstCity.list[39].wind.speed} MPH 
+    Humidity: ${firstCity.list[39].main.humidity}%`
 
     
     

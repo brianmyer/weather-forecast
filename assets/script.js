@@ -21,9 +21,11 @@ let day3Weather = document.querySelector('#day3-weather');
 let day4Weather = document.querySelector('#day4-weather');
 let day5Weather = document.querySelector('#day5-weather');
 
+console.log(`https://api.openweathermap.org/data/2.5/forecast?q=London,us&mode=xml&appid=${APIKey}`)
+
 searchBtn.addEventListener('click', function(event) {
     event.preventDefault()
-    let cityQueryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName.value}&limit=5&appid=${APIKey}`
+    let cityQueryURL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName.value}&limit=5&appid=${APIKey}`
     if (cityName.value === '') {
         inputAlert.classList.remove('hidden')
     } else {
@@ -52,16 +54,16 @@ searchBtn.addEventListener('click', function(event) {
 .then(function (firstCity) {
     console.log(firstCity);
     // wrong times, get icon instead of url to render
-    currentCity.textContent = `${firstCity.city.name} ${moment(firstCity.list[0].dt).format('MMM DD, YYYY')} https://openweathermap.org/img/wn/${firstCity.list[0].weather[0].icon}@2x.png`
+    currentCity.textContent = `${firstCity.city.name} ${moment(firstCity.list[0].dt*1000).format('MMM DD, YYYY')} https://openweathermap.org/img/wn/${firstCity.list[0].weather[0].icon}@2x.png`
     // convert from K to F
     currentCityTemp.textContent = `Temp: ${firstCity.list[0].main.temp}°F`
     currentCityWind.textContent = `Wind: ${firstCity.list[0].wind.speed} MPH`
     currentCityHumidity.textContent = `Humidity: ${firstCity.list[0].main.humidity}%`
-    day1.textContent = `${moment(firstCity.list[8].dt).format('MMM DD, YYYY')}`
-    day2.textContent = `${moment(firstCity.list[16].dt).format('MMM DD, YYYY')}`
-    day3.textContent = `${moment(firstCity.list[24].dt).format('MMM DD, YYYY')}`
-    day4.textContent = `${moment(firstCity.list[32].dt).format('MMM DD, YYYY')}`
-    day5.textContent = `${moment(firstCity.list[39].dt).format('MMM DD, YYYY')}`
+    day1.textContent = `${moment(firstCity.list[8].dt*1000).format('MMM DD, YYYY')}`
+    day2.textContent = `${moment(firstCity.list[16].dt*1000).format('MMM DD, YYYY')}`
+    day3.textContent = `${moment(firstCity.list[24].dt*1000).format('MMM DD, YYYY')}`
+    day4.textContent = `${moment(firstCity.list[32].dt*1000).format('MMM DD, YYYY')}`
+    day5.textContent = `${moment(firstCity.list[39].dt*1000).format('MMM DD, YYYY')}`
     // string literal?
     day1Weather.textContent = `https://openweathermap.org/img/wn/${firstCity.list[8].weather[0].icon}@2x.png
     Temp: ${firstCity.list[8].main.temp}°F 

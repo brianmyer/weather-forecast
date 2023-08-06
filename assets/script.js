@@ -3,9 +3,8 @@ let APIKey = 'd1cba3de9c1928443171663bf4bcd131';
 let cityName = document.querySelector('#city-name');
 let searchBtn = document.querySelector('#search');
 let inputAlert = document.querySelector('.hidden');
-let citiesSearched; 
 let cityQueryURL;
-// = JSON.parse(localStorage.getItem('cities')) || [];
+let citiesSearched = JSON.parse(localStorage.getItem('cities')) || [];
 let citiesList = document.querySelector('.list-group');
 let currentCity = document.querySelector('#current-city');
 let currentCityTemp = document.querySelector('#current-city-temp');
@@ -22,7 +21,7 @@ let day3Weather = document.querySelector('#day3-weather');
 let day4Weather = document.querySelector('#day4-weather');
 let day5Weather = document.querySelector('#day5-weather');
 
-// console.log(`https://api.openweathermap.org/data/2.5/forecast?q=London,us&mode=xml&appid=${APIKey}`)
+addCity()
 
 searchBtn.addEventListener('click', function(event) {
     event.preventDefault()
@@ -30,8 +29,11 @@ searchBtn.addEventListener('click', function(event) {
     if (cityName.value === '') {
         inputAlert.classList.remove('hidden')
     } else {
-        // citiesSearched.push(cityName.value)
-        localStorage.setItem('cities', cityName.value)
+        let cityInput = {
+            'City': cityName.value           
+        }
+        citiesSearched.push(cityInput)
+        localStorage.setItem('cities', JSON.stringify(citiesSearched))
         let newLi = document.createElement('li')
         newLi.textContent = cityName.value
         citiesList.appendChild(newLi)
@@ -52,14 +54,12 @@ function getForecast() {
 
     fetch(cityQueryURL)
     .then(function (response) {
-        // console.log(response)
         return response.json();
     })
     .then(function (citiesFound) {
-        // console.log(citiesFound);
         let firstCity = citiesFound[0];
-        // console.log(firstCity.lat);
-        // console.log(firstCity.lon);
+        console.log(firstCity.lat);
+        console.log(firstCity.lon);
         return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${firstCity.lat}&lon=${firstCity.lon}&appid=${APIKey}`)
     })
     
@@ -107,4 +107,16 @@ function getForecast() {
         cityName.value = ''
         inputAlert.classList.add('hidden')
     });
+}
+
+function addCity() {
+    for (let i = 0; i < citiesSearched.length; i++) {
+        let listItem = citiesSearched[i];
+    
+        let li = document.createElement("li");
+        li.textContent = listItem.City
+        li.setAttribute("data-index", i);
+        citiesList.appendChild(li);
+        
+    }
 }

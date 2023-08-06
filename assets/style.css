@@ -1,3 +1,51 @@
+h1 {
+    text-align: center;
+    background-color: rgba(32, 32, 142, 0.649);
+    color: white;
+    padding: 15px;
+
+}
+
+h3,
+form {
+    padding: 10px;
+}
+
+button,
+li {
+    background-color: gray;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+    border-radius: 10px;
+}
+
+button:hover,
+li:hover {
+    opacity: .5;
+    cursor: grab;
+}
+
+.flex {
+    display: flex;
+}
+
 .hidden {
     display: none;
+}
+
+.card {
+    background-color: rgba(32, 32, 142, 0.649);
+    color: white;
+    height: 25vh;
+    padding: 10px;
+    margin: 0 5px;
+}
+
+#search {
+    border-right: 3px solid black;
+}
+#current-forecast {
+    border: 3px solid rgba(32, 32, 142, 0.649);
+    margin: 5vh 0;
 }

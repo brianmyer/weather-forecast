@@ -20,6 +20,11 @@ li {
     border-radius: 10px;
 }
 
+#current-city-img {
+    height: 100px;
+    width: auto;
+}
+
 button:hover,
 li:hover {
     opacity: .5;
@@ -37,7 +42,7 @@ li:hover {
 .card {
     background-color: rgba(32, 32, 142, 0.649);
     color: white;
-    height: 25vh;
+    height: fit-content;
     padding: 10px;
     margin: 0 5px;
 }
